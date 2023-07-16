@@ -51,30 +51,30 @@ void ft_putnbr(int nb)
 
 
 // this atoi returns 0 if a in
-int ft_atoi(char *s, long *res)
+int ft_atoi(char *s, int *res)
 {
     size_t i;
     int sign;
 
     i = 0;
     sign = 1;
-    res = 0;
+    *res = 0;
     if (s[i] == '-')
     {
         sign *= -1;
         i++;
     }
     else if (s[i] == '+')
-        i++:
+        i++;
     if (s[i] == 0)
-        return (-1);
+        return (-1); 
     while (s[i])
     {
         if (s[i] < '0' || s[i] > '9')
             return (-1);
-        res = res * 10 + (s[i] - 48);
+        *res = *res * 10 + (s[i] - 48);
         i++;
     }
-    res = res * sign;
+    *res = *res * sign;
     return (0);
 }

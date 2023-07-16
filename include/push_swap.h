@@ -14,15 +14,15 @@ typedef struct t_pile
    struct t_pile *next;
 } pile;
 
-int ft_valid_args(int ac, char **av);
+int ft_valid_args(char **argv);
 
-// int ft_is_integer(char *av);
+int ft_is_num(char *s);
 
-int ft_atoi(char *s, long *res);
+int ft_atoi(char *s, int *res);
 
 void ft_putnbr(int nb);
 
-int ft_is_dup(char **av, char *arg, size_t a);
+int ft_strint_cmp(char *s1, char *s2);
 
 void ft_putchar(char c, int fd);
 
