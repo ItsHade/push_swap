@@ -82,6 +82,7 @@ int ft_strint_cmp(char *s1, char *s2)
     return ((unsigned char)s1[i] - (unsigned char)s2[a]);
 }
 
+//recommencer avec ft_split : pas un nombre, ne tiens pas dans un int, pas de doublons
 int ft_valid_args(char **argv)
 {
     int i;

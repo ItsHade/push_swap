@@ -14,6 +14,8 @@ typedef struct t_pile
    struct t_pile *next;
 } pile;
 
+char	**ft_split(char const *s, char c);
+
 int ft_valid_args(char **argv);
 
 int ft_is_num(char *s);
