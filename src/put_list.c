@@ -1,9 +1,11 @@
 #include "../include/push_swap.h"
 
-void ft_putlst(pile *lst)
+//below are not usefull functions in the final build
+
+void ft_putlst(t_pile *lst)
 {
     int element;
-    pile *current;
+    t_pile *current;
 
     element = 0;
     current = lst;
@@ -19,9 +21,9 @@ void ft_putlst(pile *lst)
     }
 }
 
-pile *ft_lstcreate_b(void)
+t_pile *ft_lstcreate_b(void)
 {
-    pile *testPile;
+    t_pile *testPile;
     char c;
 
     c = 'A';
@@ -36,9 +38,9 @@ pile *ft_lstcreate_b(void)
     return (testPile);
 }
 
-pile *ft_lstcreate_a(void)
+t_pile *ft_lstcreate_a(void)
 {
-    pile *testPile;
+    t_pile *testPile;
     char c;
 
     c = 'a';

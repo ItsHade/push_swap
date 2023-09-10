@@ -105,10 +105,12 @@ void ft_puttabs(t_stack stack)
 }
 
 // you need to check manualy if there is a zero or not because you can't set a tab[index] to null or you need to re create the tab and re malloc
-int main(void)
+int main(int argc, char **argv)
 {
     t_stack stack;
 
+    if (argc < 2)
+        return (-1);
     stack.size_max = 7;
     stack.size_a = stack.size_max;
     stack.size_b = 0;
@@ -126,6 +128,9 @@ int main(void)
     stack.tab_a[5] = 8;
     stack.tab_a[6] = 7;
     
+
+    ft_putnbr(ft_atoi(argv[1]));
+    ft_putchar('\n', 1);
     ft_puttabs(stack);
     //test swap
     ft_putstr("SWAPING\n", 1);

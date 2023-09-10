@@ -19,88 +19,62 @@ int ft_is_num(char *s)
     return (0);
 }
 
-int ft_check_dup(char **argv)
+// int ft_check_dup(char **argv)
+// {
+//     int i;
+//     int a;
+
+//     i = 1;
+//     while (argv[i])
+//     {
+//         a = 1;
+//         while (argv[a])
+//         {
+//             if (a != i && ft_strint_cmp(argv[i], argv[a]) == 0)
+//                 return (-1);
+//             a++;
+//         }
+//         i++;
+//     }
+//     return (0);
+// }
+
+
+int ft_check_splitted(char **strs, t_pile **pile_a)
 {
-    int i;
     int a;
+    long int nb;
+    t_pile *new;
 
-    i = 1;
-    while (argv[i])
-    {
-        a = 1;
-        while (argv[a])
-        {
-            if (a != i && ft_strint_cmp(argv[i], argv[a]) == 0)
-                return (-1);
-            a++;
-        }
-        i++;
-    }
-    return (0);
-}
-
-int ft_is_zero(char *s)
-{
-    int i;
-
-    i = 0;
-    if (s[i] == '+' || s[i] == '-')
-        i++;
-    while (s[i] && s[i] == '0')
-        i++;
-    if (s[i] != '\0')
-        return (-1);
-    return (0);
-}
-
-int ft_strint_cmp(char *s1, char *s2)
-{
-    int i;
-    int a;
-
-    i = 0;
     a = 0;
-    if (s1[i] == '+')
+    while (strs[a][0] != 0)
     {
-        if (s2[a] != '+')
-            i++;
-    }
-    else
-    { 
-        if (s2[a] == '+')
-            a++;
-    }
-    while (s1[i] == 0)
-        i++;
-    while (s2[a] == 0)
-        a++;
-    while (s1[i] && s2[a] && s1[i] == s2[a])
-    {
-        i++;
+        ft_putstr(strs[a], 1);
+        ft_putchar('\n', 1);
+        if (ft_is_num(strs[a]) == -1)
+            return (-1);
+        nb = ft_atol(strs[a]);
+        if (nb < INT_MIN || nb > INT_MAX)
+            return (-1);
+        new = ft_lstnew(nb);
+        ft_lstadd_back(pile_a, new);
         a++;
     }
-    return ((unsigned char)s1[i] - (unsigned char)s2[a]);
 }
 
-//recommencer avec ft_split : pas un nombre, ne tiens pas dans un int, pas de doublons
-int ft_valid_args(char **argv)
+int ft_valid_args(char **argv, t_pile **pile_a)
 {
     int i;
-    int zero_count;
+    char **strs;
 
     i = 1;
-    zero_count = 0;
     while (argv[i])
     {
-        if (ft_is_num(argv[i]) == -1)
-            return (-1);
-        if (ft_is_zero(argv[i]) == 0)
-            zero_count++;
+        strs = ft_split(argv[i], ' ');
+        if (ft_check_splitted(strs, pile_a) == -1)
+            return (ft_freesplit(strs), -1);
+        ft_freesplit(strs);
         i++;
     }
-    if (zero_count > 1)
-        return (-1);
-    if (ft_check_dup(argv) == -1)
-        return (-1);
     return (0);
 }

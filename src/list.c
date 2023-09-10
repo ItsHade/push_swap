@@ -1,10 +1,10 @@
 #include "../include/push_swap.h"
 
-pile *ft_lstnew(int nb)
+t_pile *ft_lstnew(int nb)
 {
-    pile *new;
+    t_pile *new;
 
-    new = malloc(sizeof(pile));
+    new = malloc(sizeof(t_pile));
     if (!new)
         return (NULL);
     new->nb = nb;
@@ -12,7 +12,7 @@ pile *ft_lstnew(int nb)
     return (new);
 }
 
-pile *ft_lstlast(pile *lst)
+t_pile *ft_lstlast(t_pile *lst)
 {
     if (lst == NULL || lst->next == NULL)
         return (lst);
@@ -23,9 +23,9 @@ pile *ft_lstlast(pile *lst)
     return (lst);
 }
 
-void ft_lstadd_back(pile **lst, pile *new)
+void ft_lstadd_back(t_pile **lst, t_pile *new)
 {
-    pile *cur;
+    t_pile *cur;
 
     cur = *lst;
     if (lst != NULL && *lst != NULL)
@@ -37,26 +37,26 @@ void ft_lstadd_back(pile **lst, pile *new)
     *lst = new;
 }
 
-void ft_lstadd_front(pile **lst, pile *new)
+void ft_lstadd_front(t_pile **lst, t_pile *new)
 {
-    pile *tmp;
+    t_pile *tmp;
 
     tmp = *lst;
     *lst = new;
     new->next = tmp;
 }
 
-// void ft_lstdelone(pile *lst)
+// void ft_lstdelone(t_pile *lst)
 // {
 //     lst->nb = NULL;
 //     if (lst != NULL)
 //         free(lst);
 // }
 
-void ft_lstclear(pile **lst)
+void ft_lstclear(t_pile **lst)
 {
-    pile *tmp;
-    pile *start;
+    t_pile *tmp;
+    t_pile *start;
 
     start = *lst;
     while (start)
@@ -69,7 +69,7 @@ void ft_lstclear(pile **lst)
     *lst = NULL;
 }
 
-int ft_lstsize(pile *lst)
+int ft_lstsize(t_pile *lst)
 {
     size_t i;
 

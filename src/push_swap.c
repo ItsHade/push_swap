@@ -4,8 +4,8 @@
 
 // int main(int argc, char **argv)
 // {
-//     pile *pile_a;
-//     pile *pile_b;
+//     t_pile *pile_a;
+//     t_pile *pile_b;
 //     int i;
     
 //     if (argc < 3)
@@ -43,7 +43,7 @@
 //     return (0);
 // }
 
-int ft_is_sorted(pile *Pile)
+int ft_is_sorted(t_pile *Pile)
 {
     while (Pile->next != NULL)
     {
@@ -56,17 +56,26 @@ int ft_is_sorted(pile *Pile)
 
 int main(int argc, char **argv)
 {
-    pile *pile_a;
-    pile *pile_b;
+    t_pile *pile_a;
+    t_pile *pile_b;
     int pile_len;
 
+    pile_a = NULL;
+    pile_b = NULL;
     if (argc < 2)
         return (0);
-    if (ft_valid_args(argv) == -1)
+    if (ft_valid_args(argv, &pile_a) == -1)
     {
         ft_putstr("Error\n", 2);
-        return (0);
+        return (ft_lstclear(&pile_a), 0);
     }
-    printf("OK!\n");
+    ft_putstr("OK!\n", 1);
+    ft_putstr("Liste A: \n");
+    ft_putlst(pile_a);
+    if (ft_is_sorted(pile_a) == 0)
+        return (ft_lstclear(&pile_a), 0);
+    ft_sort(&pile_a, &pile_b);
+    ft_lstclear(&pile_a);
+    ft_lstclear(&pile_b);
     return (0);
 }

@@ -1,9 +1,9 @@
 #include "../include/push_swap.h"
 
-void ft_lst_reverse_rotate(pile **Pile)
+void ft_lst_reverse_rotate(t_pile **Pile)
 {
-    pile *last;
-    pile *current;
+    t_pile *last;
+    t_pile *current;
 
     if (*Pile == NULL || (*Pile)->next == NULL) 
         return ;
@@ -16,19 +16,19 @@ void ft_lst_reverse_rotate(pile **Pile)
     *Pile = last;
 }
 
-void do_rra(pile **pile_a)
+void do_rra(t_pile **pile_a)
 {
     ft_lst_reverse_rotate(pile_a);
     ft_putstr("rra\n", 1);
 }
 
-void do_rrb(pile **pile_b)
+void do_rrb(t_pile **pile_b)
 {
     ft_lst_reverse_rotate(pile_b);
     ft_putstr("rrb\n", 1);
 }
 
-void do_rrr(pile **pile_a, pile **pile_b)
+void do_rrr(t_pile **pile_a, t_pile **pile_b)
 {
     ft_lst_reverse_rotate(pile_a);
     ft_lst_reverse_rotate(pile_b);

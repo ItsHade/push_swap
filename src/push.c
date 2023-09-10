@@ -2,10 +2,10 @@
 
 
 //if (*pile_a == NULL) ?
-void do_pa(pile **pile_a, pile **pile_b)
+void do_pa(t_pile **pile_a, t_pile **pile_b)
 {
-    pile *next_a;
-    pile *next_b;
+    t_pile *next_a;
+    t_pile *next_b;
 
     if (*pile_b == NULL)
         return ;
@@ -17,10 +17,10 @@ void do_pa(pile **pile_a, pile **pile_b)
     ft_putstr("pa\n", 1);
 }
 
-void do_pb(pile **pile_a, pile **pile_b)
+void do_pb(t_pile **pile_a, t_pile **pile_b)
 {
-    pile *next_a;
-    pile *next_b;
+    t_pile *next_a;
+    t_pile *next_b;
 
     if (*pile_a == NULL)
         return ;

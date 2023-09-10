@@ -10,55 +10,30 @@ int ft_strlen(char *s)
     return (i);
 }
 
-void ft_putchar(char c, int fd)
+void ft_freesplit(char **strs)
 {
-    write(fd, &c, 1);
-}
-
-// peut etre remplacer par ft_printf par la suite
-void ft_putstr(char *str, int fd)
-{
-    size_t i;
+    int i;
 
     i = 0;
-    while (str && str[i])
+    while (strs[i][0] != 0)
     {
-        write(fd, &str[i], 1);
+        free(strs[i]);
         i++;
     }
+    free(strs[i]);
+    free(strs);
 }
-
-void ft_putnbr(int nb)
-{
-    long num;
-
-    if (nb < 0)
-    {
-        num = -nb;
-        ft_putchar('-', 1);
-    }
-    else
-        num = nb;
-    if (num <= 9)
-        ft_putchar(num + 48, 1);
-    else
-    {
-        ft_putnbr(num / 10);
-        ft_putchar(num % 10 + 48, 1);
-    }
-
-}
-
 
 // this atoi returns 0 if a in
-int ft_atoi(char *s, int *res)
+long ft_atol(char *s)
 {
     size_t i;
     int sign;
+    long int res;
 
     i = 0;
     sign = 1;
-    *res = 0;
+    res = 0;
     if (s[i] == '-')
     {
         sign *= -1;
@@ -72,9 +47,9 @@ int ft_atoi(char *s, int *res)
     {
         if (s[i] < '0' || s[i] > '9')
             return (-1);
-        *res = *res * 10 + (s[i] - 48);
+        res = res * 10 + (s[i] - 48);
         i++;
     }
-    *res = *res * sign;
-    return (0);
+    res = res * sign;
+    return (res);
 }

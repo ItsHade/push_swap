@@ -1,10 +1,10 @@
 #include "../include/push_swap.h"
 
-void ft_lstrotate(pile **Pile)
+void ft_lstrotate(t_pile **Pile)
 {
-    pile *last;
-    pile *current;
-    pile *next;
+    t_pile *last;
+    t_pile *current;
+    t_pile *next;
 
     if (*Pile == NULL || (*Pile)->next == NULL)
         return ;
@@ -16,19 +16,19 @@ void ft_lstrotate(pile **Pile)
     *Pile = next;
 }
 
-void do_ra(pile **pile_a)
+void do_ra(t_pile **pile_a)
 {
     ft_lstrotate(pile_a);
     ft_putstr("ra\n", 1);
 }
 
-void do_rb(pile **pile_b)
+void do_rb(t_pile **pile_b)
 {
     ft_lstrotate(pile_b);
     ft_putstr("rb\n", 1);
 }
 
-void do_rr(pile **pile_a, pile **pile_b)
+void do_rr(t_pile **pile_a, t_pile **pile_b)
 {
     ft_lstrotate(pile_a);
     ft_lstrotate(pile_b);
