@@ -24,7 +24,7 @@ void do_pb(t_pile **pile_a, t_pile **pile_b)
 
     if (*pile_a == NULL)
         return ;
-    next_a = *pile_a;
+    next_a = (*pile_a)->next;
     next_b = *pile_b;
     *pile_b = *pile_a;
     (*pile_b)->next = next_b;

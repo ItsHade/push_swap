@@ -49,8 +49,8 @@ int ft_check_splitted(char **strs, t_pile **pile_a)
     a = 0;
     while (strs[a][0] != 0)
     {
-        ft_putstr(strs[a], 1);
-        ft_putchar('\n', 1);
+        // ft_putstr(strs[a], 1);
+        // ft_putchar('\n', 1);
         if (ft_is_num(strs[a]) == -1)
             return (-1);
         nb = ft_atol(strs[a]);
@@ -60,6 +60,26 @@ int ft_check_splitted(char **strs, t_pile **pile_a)
         ft_lstadd_back(pile_a, new);
         a++;
     }
+}
+
+int ft_check_dup(t_pile **pile_a)
+{
+    t_pile *current;
+    t_pile *check;
+
+    current = *pile_a;
+    while (current != NULL)
+    {
+        check = current->next;
+        while (check != NULL)
+        {
+            if (check->nb == current->nb)
+                return (-1);
+            check = check->next;
+        }
+        current = current->next;
+    }
+    return (0);
 }
 
 int ft_valid_args(char **argv, t_pile **pile_a)
@@ -76,5 +96,7 @@ int ft_valid_args(char **argv, t_pile **pile_a)
         ft_freesplit(strs);
         i++;
     }
+    if (ft_check_dup(pile_a) == -1)
+        return (ft_putstr("Duplicates!\n", 1), -1);
     return (0);
 }

@@ -1,5 +1,6 @@
 #include "../include/push_swap.h"
 
+int g_count = 0;
 //Main used to individually test the different rule fonctions
 
 // int main(int argc, char **argv)
@@ -10,11 +11,6 @@
     
 //     if (argc < 3)
 //         return (0);
-//     if (ft_strint_cmp(argv[1], argv[2]) == 0)
-//     {
-//         ft_putstr("DUP SPOTTED!\n", 1);
-//         return (0);
-//     }
 //     pile_a = ft_lstcreate_a();
 //     pile_b = ft_lstcreate_b();
 //     i = 0;
@@ -54,11 +50,70 @@ int ft_is_sorted(t_pile *Pile)
     return (0);
 }
 
+int ft_get_min(t_pile **pile_a)
+{
+    t_pile *current;
+    t_pile *min;
+ 
+    if (*pile_a == NULL)
+        return (0);
+    current = *pile_a;
+    min = *pile_a;
+    while (current != NULL)
+    {
+        if (current->nb < min->nb)
+            min = current;
+        current = current->next;
+    }
+    return (min->nb);
+}
+
+void ft_put_min_to_b(t_pile **pile_a, t_pile **pile_b, int min)
+{
+    if (*pile_a == NULL)
+        return ;
+    while (*pile_a != NULL && (*pile_a)->nb != min)
+    {
+        do_ra(pile_a);
+        g_count++;
+    }
+    do_pb(pile_a, pile_b);
+    g_count++;
+}
+
+// sort 2, 3, 4, 5, large
+int ft_sort(t_pile **pile_a, t_pile **pile_b)
+{
+    long int min;
+    int len;
+    int i;
+
+    i = 0;
+    len = ft_lstsize(*pile_a);
+    while (i < len)
+    {
+        min = ft_get_min(pile_a);
+        // ft_putstr("min: ", 1);
+        // ft_putnbr(min);
+        // ft_putchar('\n', 1);
+        ft_put_min_to_b(pile_a, pile_b, min);
+        i++;
+    }
+    i = 0;
+    while (i < len)
+    {
+        do_pa(pile_a, pile_b);
+        g_count++;
+        i++;
+    }
+    return (0);
+}
+
 int main(int argc, char **argv)
 {
     t_pile *pile_a;
     t_pile *pile_b;
-    int pile_len;
+    
 
     pile_a = NULL;
     pile_b = NULL;
@@ -69,12 +124,31 @@ int main(int argc, char **argv)
         ft_putstr("Error\n", 2);
         return (ft_lstclear(&pile_a), 0);
     }
-    ft_putstr("OK!\n", 1);
-    ft_putstr("Liste A: \n");
-    ft_putlst(pile_a);
+    // ft_putstr("Liste A: \n", 1);
+    // ft_putlst(pile_a);
+    // ft_putstr("Liste B: \n", 1);
+    // ft_putlst(pile_b);
     if (ft_is_sorted(pile_a) == 0)
-        return (ft_lstclear(&pile_a), 0);
+        return (ft_putstr("Already sorted!\n", 1), ft_lstclear(&pile_a), 0);
     ft_sort(&pile_a, &pile_b);
+    // do_ra(&pile_a);
+    // do_ra(&pile_a);
+    // do_ra(&pile_a);
+    // do_pb(&pile_a, &pile_b);
+    // do_pb(&pile_a, &pile_b);
+    // do_pb(&pile_a, &pile_b);
+    // do_pb(&pile_a, &pile_b);
+    
+    ft_putstr("Liste A: \n", 1);
+    ft_putlst(pile_a);
+    ft_putstr("Liste B: \n", 1);
+    ft_putlst(pile_b);
+    if (ft_is_sorted(pile_a) == 0)
+    {
+        ft_putstr("Stack has been sorted in: \n", 1);
+        ft_putnbr(g_count);
+        ft_putstr(" instructions!\n", 1);
+    }
     ft_lstclear(&pile_a);
     ft_lstclear(&pile_b);
     return (0);

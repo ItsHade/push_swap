@@ -20,7 +20,7 @@ void ft_putstr(char *str, int fd)
 
 void ft_putnbr(int nb)
 {
-    long num;
+    unsigned int num;
 
     if (nb < 0)
     {
