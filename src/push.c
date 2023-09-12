@@ -1,7 +1,6 @@
 #include "../include/push_swap.h"
 
 
-//if (*pile_a == NULL) ?
 void do_pa(t_pile **pile_a, t_pile **pile_b)
 {
     t_pile *next_a;

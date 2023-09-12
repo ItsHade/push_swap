@@ -11,7 +11,7 @@
 
 typedef struct s_pile
 {
-   int nb;
+   long int nb;
    int index;
    struct s_pile *next;
 } t_pile;
