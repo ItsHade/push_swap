@@ -50,10 +50,11 @@ int ft_is_sorted(t_pile *Pile)
     return (0);
 }
 
-int ft_get_min(t_pile **pile_a)
+int ft_get_min(t_pile **pile_a, long int last)
 {
     t_pile *current;
     t_pile *min;
+    static int i = 0;
  
     if (*pile_a == NULL)
         return (0);
@@ -61,10 +62,16 @@ int ft_get_min(t_pile **pile_a)
     min = *pile_a;
     while (current != NULL)
     {
-        if (current->nb < min->nb)
+        if (current->nb < min->nb && current->nb > last)
             min = current;
         current = current->next;
-    }
+    }  
+    min->index = i;
+    i++;
+    ft_putnbr(min->nb);
+    ft_putstr("->", 1);         
+    ft_putnbr(min->index);
+    ft_putstr("   ", 1);
     return (min->nb);
 }
 
@@ -82,6 +89,7 @@ void ft_put_min_to_b(t_pile **pile_a, t_pile **pile_b, int min)
 }
 
 // sort 2, 3, 4, 5, large
+// get min and max check which is gonna take less instructions to get to
 int ft_sort(t_pile **pile_a, t_pile **pile_b)
 {
     long int min;
@@ -90,22 +98,28 @@ int ft_sort(t_pile **pile_a, t_pile **pile_b)
 
     i = 0;
     len = ft_lstsize(*pile_a);
+    ft_putstr("len: ", 1);
+    ft_putnbr(len);
+    ft_putchar('\n', 1);
+    min = -2147483649;
     while (i < len)
     {
-        min = ft_get_min(pile_a);
-        // ft_putstr("min: ", 1);
-        // ft_putnbr(min);
-        // ft_putchar('\n', 1);
-        ft_put_min_to_b(pile_a, pile_b, min);
+        min = ft_get_min(pile_a, min);
+        ft_putstr("min: ", 1);
+        ft_putnbr(min);
+        ft_putchar('\n', 1);
+        
+        // ft_put_min_to_b(pile_a, pile_b, min);
         i++;
     }
-    i = 0;
-    while (i < len)
-    {
-        do_pa(pile_a, pile_b);
-        g_count++;
-        i++;
-    }
+    // ft_sort_by_index(pile_a, pile_b);
+    // i = 0;
+    // while (i < len)
+    // {
+    //     do_pa(pile_a, pile_b);
+    //     g_count++;
+    //     i++;
+    // }
     return (0);
 }
 
@@ -138,11 +152,12 @@ int main(int argc, char **argv)
     // do_pb(&pile_a, &pile_b);
     // do_pb(&pile_a, &pile_b);
     // do_pb(&pile_a, &pile_b);
-    
+    /*
     ft_putstr("Liste A: \n", 1);
     ft_putlst(pile_a);
     ft_putstr("Liste B: \n", 1);
     ft_putlst(pile_b);
+    */
     if (ft_is_sorted(pile_a) == 0)
     {
         ft_putstr("Stack has been sorted in: \n", 1);

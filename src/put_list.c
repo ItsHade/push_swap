@@ -15,6 +15,8 @@ void ft_putlst(t_pile *lst)
         ft_putnbr(element);
         ft_putstr(": ", 1);
         ft_putnbr(current->nb);
+        ft_putstr(" index: ", 1);
+        ft_putnbr(current->index);
         ft_putchar('\n', 1);
         current = current->next;
         element++;

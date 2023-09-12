@@ -12,6 +12,7 @@
 typedef struct s_pile
 {
    int nb;
+   int index;
    struct s_pile *next;
 } t_pile;
 
