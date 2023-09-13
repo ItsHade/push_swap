@@ -113,9 +113,8 @@ void ft_sort_2(t_pile **Pile, char c)
 int ft_sort_index(t_pile **pile_a, t_pile **pile_b, int len)
 {
     int a;
+    int max;
 
-
-    a = 0;
     while ((*pile_a)->index != 0)
     {
         do_ra(pile_a);
@@ -128,17 +127,18 @@ int ft_sort_index(t_pile **pile_a, t_pile **pile_b, int len)
         ft_sort_2(pile_b, 'b');
         g_count++;
     }
+    max = (*pile_b)->next->nb;
     while (*pile_a != NULL)
     {
-        while ((*pile_a)->index > (*pile_b)->index)
+        while ((*pile_b)->index > (*pile_a)->index && (*pile_b)->nb < max)
         {
             do_rb(pile_b);
             g_count++;
         }
+        max = (*pile_a)->nb;
         do_pb(pile_a, pile_b);
         g_count++;
     }
-    return (0);
     a = 0;
     while (a < len)
     {
