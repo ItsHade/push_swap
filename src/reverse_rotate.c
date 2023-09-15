@@ -19,7 +19,7 @@ void ft_lst_reverse_rotate(t_pile **Pile)
 void do_rra(t_pile **pile_a)
 {
     ft_lst_reverse_rotate(pile_a);
-    ft_putstr("rra\n", 1);
+    // ft_putstr("rra\n", 1);
 }
 
 void do_rrb(t_pile **pile_b)

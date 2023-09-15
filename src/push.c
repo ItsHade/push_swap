@@ -13,7 +13,7 @@ void do_pa(t_pile **pile_a, t_pile **pile_b)
     *pile_a = *pile_b;
     (*pile_a)->next = next_a;
     *pile_b = next_b;
-    ft_putstr("pa\n", 1);
+    // ft_putstr("pa\n", 1);
 }
 
 void do_pb(t_pile **pile_a, t_pile **pile_b)
@@ -28,5 +28,5 @@ void do_pb(t_pile **pile_a, t_pile **pile_b)
     *pile_b = *pile_a;
     (*pile_b)->next = next_b;
     *pile_a = next_a;
-    ft_putstr("pb\n", 1);
+    // ft_putstr("pb\n", 1);
 }

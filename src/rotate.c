@@ -19,7 +19,7 @@ void ft_lstrotate(t_pile **Pile)
 void do_ra(t_pile **pile_a)
 {
     ft_lstrotate(pile_a);
-    ft_putstr("ra\n", 1);
+    // ft_putstr("ra\n", 1);
 }
 
 void do_rb(t_pile **pile_b)

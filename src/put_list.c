@@ -2,6 +2,21 @@
 
 //below are not usefull functions in the final build
 
+// not needed int final build
+void ft_putarray(int array[], int size)
+{
+    int i;
+
+    i = 0;
+    while (i < size)
+    {
+        ft_putnbr(array[i]);
+        ft_putchar(' ', 1);
+        i++;
+    }
+    ft_putchar('\n', 1);
+}
+
 void ft_putlst(t_pile *lst)
 {
     int element;

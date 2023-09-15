@@ -16,6 +16,7 @@ typedef struct s_pile
    struct s_pile *next;
 } t_pile;
 
+void ft_radixsort(t_pile **stack, t_pile **stack2);
 
 void ft_freesplit(char **strs);
 
@@ -50,6 +51,8 @@ void ft_lstdelone(t_pile *lst);
 void ft_lstclear(t_pile **lst);
 
 int ft_lstsize(t_pile *lst);
+
+void ft_putarray(int array[], int size);
 
 void ft_putlst(t_pile *lst);
 
