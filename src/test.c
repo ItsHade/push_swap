@@ -152,3 +152,43 @@ int main(int argc, char **argv)
     ft_puttabs(stack);
     return (free(stack.tab_a), free(stack.tab_b), 0);
 }
+
+
+
+//Main used to individually test the different rule fonctions [for linked lists]
+
+// int main(int argc, char **argv)
+// {
+//     t_pile *pile_a;
+//     t_pile *pile_b;
+//     int i;
+    
+//     if (argc < 3)
+//         return (0);
+//     pile_a = ft_lstcreate_a();
+//     pile_b = ft_lstcreate_b();
+//     i = 0;
+//     ft_putlst(pile_a);
+//     ft_putstr("Finished printing pile_a!\n", 1);
+//     ft_putlst(pile_b);
+//     ft_putstr("Finished printing pile_b!\n", 1);
+//     ft_lstswap(&pile_a);
+//     ft_putstr("SWAPED!\n", 1);
+//     ft_putlst(pile_a);
+//     do_pa(&pile_a, &pile_b);
+//     ft_putlst(pile_a);
+//     ft_putstr("Finished printing pile_a!\n", 1);
+//     ft_putlst(pile_b);
+//     ft_putstr("Finished printing pile_b!\n", 1);
+//     ft_putstr("Rotating pile_b\n", 1);
+//     while (i++ < 5)
+//         do_rb(&pile_b);
+//     ft_putlst(pile_b);
+//     i = 0;
+//     while (i++ < 5)
+//         do_rra(&pile_a);
+//     ft_putlst(pile_a);
+//     ft_lstclear(&pile_a);
+//     ft_lstclear(&pile_b);
+//     return (0);
+// }
