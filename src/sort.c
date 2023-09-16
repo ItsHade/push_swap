@@ -66,7 +66,7 @@ int ft_getrotatelen(t_pile *pile_a, int index, int size)
 }
 
 // too long -> divide in multiple functions
-void lstCountingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int max)
+void ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int max)
 {
     int i;
     int a;
@@ -131,6 +131,7 @@ void lstCountingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int 
         g_count++;
         i++;
     }
+    // *1
     while (*pile_b != NULL)
     {
         do_pa(pile_a, pile_b);
@@ -173,7 +174,8 @@ void ft_radixsort(t_pile **pile_a, t_pile **pile_b)
     max = lstMaxIndex(*pile_a);
     while (max / place > 0)
     {
-        lstCountingSort(pile_a, pile_b, size, place, 10);
+        // *1 enlever la boucle qui remet tout dans A et refaire une fonction qu'on appelle une fois sur deux qui tri a partir de B (a l'envers)
+        ft_countingSort(pile_a, pile_b, size, place, 10);
         place *= 10;
     }
 }
