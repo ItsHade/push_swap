@@ -25,6 +25,8 @@ typedef struct s_pile
 	struct s_pile	*next;
 }	t_pile;
 
+int	ft_is_sorted(t_pile *Pile);
+
 void	ft_bzero(void *s, size_t n);
 
 void	*ft_calloc(size_t nmemb, size_t size);

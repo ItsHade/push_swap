@@ -51,10 +51,10 @@ int	main(int argc, char **argv)
 	ft_putlst(pile_b);
 	if (ft_is_sorted(pile_a) == 0)
 	{
-		ft_putstr("Stack has been sorted in: \n", 1);
-		ft_putnbr(g_count);
-		ft_putstr(" instructions!\n", 1);
+		ft_putstr("Stack has been sorted!\n", 1);
 	}
+	ft_putnbr(g_count);
+	ft_putstr(" instructions!\n", 1);
 	ft_lstclear(&pile_a);
 	ft_lstclear(&pile_b);
 	return (0);

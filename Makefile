@@ -2,6 +2,7 @@ SRCS = src/push_swap.c \
 		src/push_swap_utils.c \
 		src/check_args.c \
 		src/list.c \
+		src/list2.c \
 		src/put_list.c \
 		src/swap.c \
 		src/push.c \
