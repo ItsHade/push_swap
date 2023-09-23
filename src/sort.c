@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:04:22 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/16 21:07:05 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:17:42 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_get_min(t_pile **pile_a, long int last)
 			min = current->nb;
 		}
 		current = current->next;
-	}  
+	}
 	min_element->index = i;
 	i++;
 	return (min);
@@ -62,18 +62,18 @@ int	ft_getrotatelen(t_pile *pile_a, int index, int size)
 
 	count = 0;
 	current = pile_a;
-	// ft_putstr("------------\nsize: ", 1);
-	// ft_putnbr(size);
-	// ft_putchar('\n', 1);
+	ft_putstr("------------\nsize: ", 1);
+	ft_putnbr(size);
+	ft_putchar('\n', 1);
 	while (current->index != index)
 	{
 		current = current->next;
 		count++;
 	}
-	// ft_putstr("count: ", 1);
-	// ft_putnbr(count);
-	// ft_putchar('\n', 1);
-	if (count >  (size / 2))
+	ft_putstr("count: ", 1);
+	ft_putnbr(count);
+	ft_putchar('\n', 1);
+	if (count > (size / 2)) //maybe >=
 		return (-1);
 	return (1);
 }
@@ -175,12 +175,14 @@ void	ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int 
 	ft_putstr("count: ", 1);
 	ft_putarray(count, max);
 	//si is sorted == 0 we stop and we have A = [6, 7, 8] et B = [5, 4, 3, 2, 1, 0]
-	while (size > 0 && ft_is_sorted(*pile_a) == -1)
+	while (size > 3 && ft_is_sorted(*pile_a) == -1)
 	{
 		a = ft_getrotatelen(*pile_a, output[i], size);
-		// ft_putstr("a: ", 1);
-		// ft_putnbr(a);
-		// ft_putchar('\n', 1);
+		ft_putstr("a: ", 1);
+		ft_putnbr(a);
+		ft_putchar('\n', 1);
+		ft_putstr("Liste A index: ", 1);
+		ft_putlst2(*pile_a);
 		while ((*pile_a)->index != output[i])
 		{
 			if (a == 1)
@@ -196,16 +198,15 @@ void	ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int 
 	}
 	ft_putstr("TEST: ", 1);
 	ft_putlst(*pile_a);
-	ft_putchar('\n', 1);
-	// ft_sort3(pile_a, pile_b);
-	// stop ^ quand size == 2 (2 elements dans A) swap si besoin et puis remettre tout B sur A
+	ft_sort3(pile_a, pile_b);
+	// stop ^ quand size == 3 (3 elements dans A) swap si besoin et puis remettre tout B sur A
 	// *1
 	while (*pile_b != NULL)
 	{
 		do_pa(pile_a, pile_b);
 		g_count++;
 	}
-	ft_putstr("pile_a after: \n", 1);
+	ft_putstr("pile_a after: ", 1);
 	ft_putlst(*pile_a);
 }
 
@@ -223,82 +224,6 @@ void	ft_addIndex(t_pile **pile_a, int size)
 	}
 }
 
-// too long -> divide in multiple functions
-void	ft_countingSort2(t_pile **pile_b, t_pile **pile_a, int size, int place, int max)
-{
-	int	i;
-	int	a;
-	int	output[size + 1];
-	int	count[max];
-	t_pile	*current;
-
-	current = *pile_b;
-	i = 0;
-	while (i < max)
-	{
-		count[i] = 0;
-		i++;
-	}
-	while (current != NULL)
-	{
-		count[(current->index / place) % 10]++;
-		current = current->next;
-	}
-	i = 1;
-	while (i < 10)
-	{
-		count[i] += count[i - 1];
-		i++;
-	}
-	i = size - 1;
-	while (i >= 0)
-	{
-		current = *pile_b;
-		a = 0;
-		while (a < i)
-		{
-			current = current->next;
-			a++;
-		}
-		output[count[(current->index / place) % 10] - 1] = current->index;
-		count[(current->index / place) % 10]--;
-		i--;
-	}
-	i = 0;
-	ft_putstr("Avant boucle finale: \n", 1);
-	ft_putstr("output: ", 1);
-	ft_putarray(output, size);
-	ft_putstr("count: ", 1);
-	ft_putarray(count, max);
-	while (*pile_b != NULL)
-	{
-		a = ft_getrotatelen(*pile_b, output[i], size);
-		// ft_putstr("a: ", 1);
-		// ft_putnbr(a);
-		// ft_putchar('\n', 1);
-		while ((*pile_b)->index != output[i])
-		{
-			if (a == 1)
-				do_rb(pile_b);
-			else
-				do_rrb(pile_b);
-			g_count++;
-		}
-		do_pa(pile_a, pile_b);
-		size--;
-		g_count++;
-		i++;
-	}
-	// stop ^ quand size == 2 (2 elements dans A) swap si besoin et puis remettre tout B sur A
-	// *1
-	// while (*pile_b != NULL)
-	// {
-	// 	do_pa(pile_a, pile_b);
-	// 	g_count++;
-	// }
-	ft_putstr("pile_b after: \n", 1);
-	ft_putlst(*pile_b);
-}
 // sort 2, 3, 4, 5, large
 // get min and max check which is gonna take less instructions to get to
 
@@ -327,29 +252,15 @@ void	ft_radixsort(t_pile **pile_a, t_pile **pile_b)
 		ft_sort4(pile_a, pile_b);
 		return ;
 	}
-	ft_putstr("Liste A: \n", 1);
-	ft_putlst(*pile_a);
-	ft_putstr("Liste B: \n", 1);
-	ft_putlst(*pile_b);
 	max = ft_maxIndex(*pile_a);
 	while (max / place > 0)
 	{
+		ft_putstr("Liste A: ", 1);
+		ft_putlst(*pile_a);
+		ft_putstr("Liste B: ", 1);
+		ft_putlst(*pile_b);
 		// *1 enlever la boucle qui remet tout dans A et refaire une fonction qu'on appelle une fois sur deux qui tri a partir de B (a l'envers)
 		ft_countingSort(pile_a, pile_b, size, place, 10);
 		place *= 10;
-		// if (max / place > 0)
-		// {
-		// 	ft_putstr("!!!!!!!!!!!!\n", 1);
-		// 	ft_countingSort2(pile_b, pile_a, size, place, 10);
-		// 	place *= 10;
-		// }
 	}
-	// if (*pile_a == NULL)
-	// {
-	// 	while (*pile_b != NULL)
-	// 	{
-	// 		do_pa(pile_a, pile_b);
-	// 		g_count++;
-	// 	}
-	// }
 }

@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:01:57 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/16 21:03:45 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:53:49 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,27 @@ void	ft_putlst(t_pile *lst)
 	current = lst;
 	while (current != NULL)
 	{
+		ft_putchar('[', 1);
 		ft_putnbr(current->nb);
-		ft_putstr(" index: ", 1);
-		ft_putnbr(current->index);
-		ft_putchar('\n', 1);
+		ft_putchar(']', 1);
 		current = current->next;
 	}
+	ft_putchar('\n', 1);
+}
+
+void	ft_putlst2(t_pile *lst)
+{
+	t_pile	*current;
+
+	current = lst;
+	while (current != NULL)
+	{
+		ft_putchar('[', 1);
+		ft_putnbr(current->index);
+		ft_putchar(']', 1);
+		current = current->next;
+	}
+	ft_putchar('\n', 1);
 }
 
 t_pile	*ft_lstcreate_b(void)

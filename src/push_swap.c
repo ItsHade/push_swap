@@ -44,10 +44,11 @@ int	main(int argc, char **argv)
 	}
 	if (ft_is_sorted(pile_a) == 0)
 		return (ft_putstr("Already sorted!\n", 1), ft_lstclear(&pile_a), 0);
-	ft_radixsort(&pile_a, &pile_b);
-	ft_putstr("Liste A: \n", 1);
+	// ft_radixsort(&pile_a, &pile_b);
+	sort(&pile_a, &pile_b);
+	ft_putstr("Liste A: ", 1);
 	ft_putlst(pile_a);
-	ft_putstr("Liste B: \n", 1);
+	ft_putstr("Liste B: ", 1);
 	ft_putlst(pile_b);
 	if (ft_is_sorted(pile_a) == 0)
 	{

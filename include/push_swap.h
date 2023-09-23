@@ -25,7 +25,15 @@ typedef struct s_pile
 	struct s_pile	*next;
 }	t_pile;
 
-int	ft_is_sorted(t_pile *Pile);
+// not mine
+
+void	sort(t_pile **stack_a, t_pile **stack_b);
+
+
+//
+void	ft_putlst2(t_pile *lst);
+
+int		ft_is_sorted(t_pile *Pile);
 
 void	ft_bzero(void *s, size_t n);
 
