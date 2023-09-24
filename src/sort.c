@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:04:22 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/22 16:17:42 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/24 12:49:31 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,10 @@ int	ft_getrotatelen(t_pile *pile_a, int index, int size)
 	return (1);
 }
 
-void ft_sort2(t_pile **pile_a, t_pile **pile_b)
-{
-	if ((*pile_a)->index > (*pile_a)->next->index)
-		do_sa(pile_a);
-	g_count++;
-}
 
-void ft_sort3(t_pile **pile_a, t_pile **pile_b)
+void	ft_sort3(t_pile **pile_a)
 {
-	int max;
+	int	max;
 
 	max = ft_maxIndex(*pile_a);
 	if ((*pile_a)->index == max)
@@ -100,32 +94,10 @@ void ft_sort3(t_pile **pile_a, t_pile **pile_b)
 		do_rra(pile_a);
 		g_count++;
 	}
-	ft_sort2(pile_a, pile_b);
+	if ((*pile_a)->index > (*pile_a)->next->index)
+		do_sa(pile_a);
 }
 
-void ft_sort4(t_pile **pile_a, t_pile **pile_b)
-{
-	if ((*pile_a)->next->next->next->index == 0)
-	{
-		do_rra(pile_a);
-		g_count++;
-	}
-	if ((*pile_a)->next->next->index == 0)
-	{
-		do_ra(pile_a);
-		g_count++;
-	}
-	if ((*pile_a)->next->index == 0)
-	{
-		do_ra(pile_a);
-		g_count++;
-	}
-	do_pb(pile_a, pile_b);
-	g_count++;
-	ft_sort3(pile_a, pile_b);
-	do_pa(pile_a, pile_b);
-	g_count++;
-}
 
 // too long -> divide in multiple functions
 void	ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int max)
@@ -198,7 +170,8 @@ void	ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int 
 	}
 	ft_putstr("TEST: ", 1);
 	ft_putlst(*pile_a);
-	ft_sort3(pile_a, pile_b);
+	ft_sort3(pile_a);
+	ft_putlst(*pile_a);
 	// stop ^ quand size == 3 (3 elements dans A) swap si besoin et puis remettre tout B sur A
 	// *1
 	while (*pile_b != NULL)
@@ -224,34 +197,15 @@ void	ft_addIndex(t_pile **pile_a, int size)
 	}
 }
 
-// sort 2, 3, 4, 5, large
 // get min and max check which is gonna take less instructions to get to
 
 
-void	ft_radixsort(t_pile **pile_a, t_pile **pile_b)
+void	ft_radixsort(t_pile **pile_a, t_pile **pile_b, int size)
 {
 	int	place;
 	int	max;
-	int	size;
 
 	place = 1;
-	size = ft_lstsize(*pile_a);
-	ft_addIndex(pile_a, size);
-	if (size == 2)
-	{
-		ft_sort2(pile_a, pile_b);
-		return ;
-	}
-	else if (size == 3)
-	{
-		ft_sort3(pile_a, pile_b);
-		return ;
-	}
-	else if (size == 4)
-	{
-		ft_sort4(pile_a, pile_b);
-		return ;
-	}
 	max = ft_maxIndex(*pile_a);
 	while (max / place > 0)
 	{

@@ -25,12 +25,12 @@ typedef struct s_pile
 	struct s_pile	*next;
 }	t_pile;
 
-// not mine
+void	ft_addIndex(t_pile **pile_a, int size);
 
-void	sort(t_pile **stack_a, t_pile **stack_b);
+void	ft_sort(t_pile **stack_a, t_pile **stack_b, int size);
 
+void	ft_sort3(t_pile **pile_a);
 
-//
 void	ft_putlst2(t_pile *lst);
 
 int		ft_is_sorted(t_pile *Pile);
@@ -39,7 +39,7 @@ void	ft_bzero(void *s, size_t n);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 
-void	ft_radixsort(t_pile **stack, t_pile **stack2);
+void	ft_radixsort(t_pile **pile_a, t_pile **pile_b, int size);
 
 void	ft_freesplit(char **strs);
 

@@ -28,10 +28,22 @@ int	ft_is_sorted(t_pile *Pile)
 	return (0);
 }
 
+void	ft_sort(t_pile **pile_a, t_pile **pile_b, int size)
+{
+	ft_addIndex(pile_a, size);
+	if (size == 2)
+		do_sa(pile_a);
+	else if (size == 3)
+		ft_sort3(pile_a);
+	else
+		ft_radixsort(pile_a, pile_b, size);
+}
+
 int	main(int argc, char **argv)
 {
 	t_pile	*pile_a;
 	t_pile	*pile_b;
+	int size;
 
 	pile_a = NULL;
 	pile_b = NULL;
@@ -44,8 +56,8 @@ int	main(int argc, char **argv)
 	}
 	if (ft_is_sorted(pile_a) == 0)
 		return (ft_putstr("Already sorted!\n", 1), ft_lstclear(&pile_a), 0);
-	// ft_radixsort(&pile_a, &pile_b);
-	sort(&pile_a, &pile_b);
+	size = ft_lstsize(pile_a);
+	ft_sort(&pile_a, &pile_b, size);
 	ft_putstr("Liste A: ", 1);
 	ft_putlst(pile_a);
 	ft_putstr("Liste B: ", 1);
