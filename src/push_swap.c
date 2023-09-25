@@ -28,7 +28,7 @@ int	ft_is_sorted(t_pile *Pile)
 	return (0);
 }
 
-void	ft_sort(t_pile **pile_a, t_pile **pile_b, int size)
+void	ft_push_swap(t_pile **pile_a, t_pile **pile_b, int size)
 {
 	ft_addIndex(pile_a, size);
 	if (size == 2)
@@ -36,7 +36,8 @@ void	ft_sort(t_pile **pile_a, t_pile **pile_b, int size)
 	else if (size == 3)
 		ft_sort3(pile_a);
 	else
-		ft_radixsort(pile_a, pile_b, size);
+		ft_sort(pile_a, pile_b, size);
+		// ft_radixsort(pile_a, pile_b, size);
 }
 
 int	main(int argc, char **argv)
@@ -54,14 +55,22 @@ int	main(int argc, char **argv)
 		ft_putstr("Error\n", 2);
 		return (ft_lstclear(&pile_a), 0);
 	}
-	if (ft_is_sorted(pile_a) == 0)
-		return (ft_putstr("Already sorted!\n", 1), ft_lstclear(&pile_a), 0);
-	size = ft_lstsize(pile_a);
-	ft_sort(&pile_a, &pile_b, size);
 	ft_putstr("Liste A: ", 1);
 	ft_putlst(pile_a);
 	ft_putstr("Liste B: ", 1);
 	ft_putlst(pile_b);
+	if (ft_is_sorted(pile_a) == 0)
+		return (ft_putstr("Already sorted!\n", 1), ft_lstclear(&pile_a), 0);
+	size = ft_lstsize(pile_a);
+	ft_push_swap(&pile_a, &pile_b, size);
+	ft_putstr("-------------\nListe A: ", 1);
+	ft_putlst(pile_a);
+	ft_putstr("Liste B: ", 1);
+	ft_putlst(pile_b);
+	ft_putstr("Liste A: ", 1);
+	ft_putlst2(pile_a);
+	ft_putstr("Liste B: ", 1);
+	ft_putlst2(pile_b);
 	if (ft_is_sorted(pile_a) == 0)
 	{
 		ft_putstr("Stack has been sorted!\n", 1);

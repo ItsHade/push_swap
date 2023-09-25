@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:01:57 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/21 21:53:49 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/25 21:05:08 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,21 @@ void	ft_putlst2(t_pile *lst)
 	{
 		ft_putchar('[', 1);
 		ft_putnbr(current->index);
+		ft_putchar(']', 1);
+		current = current->next;
+	}
+	ft_putchar('\n', 1);
+}
+
+void	ft_putlst_pos(t_pile *lst)
+{
+	t_pile	*current;
+
+	current = lst;
+	while (current != NULL)
+	{
+		ft_putchar('[', 1);
+		ft_putnbr(current->pos);
 		ft_putchar(']', 1);
 		current = current->next;
 	}

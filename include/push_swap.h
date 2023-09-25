@@ -22,16 +22,23 @@ typedef struct s_pile
 {
 	long			nb;
 	int				index;
+	int				pos;
 	struct s_pile	*next;
 }	t_pile;
 
+void	ft_put_index_zero_top(t_pile **pile_a, int size);
+
 void	ft_addIndex(t_pile **pile_a, int size);
+
+void	ft_push_swap(t_pile **stack_a, t_pile **stack_b, int size);
 
 void	ft_sort(t_pile **stack_a, t_pile **stack_b, int size);
 
 void	ft_sort3(t_pile **pile_a);
 
 void	ft_putlst2(t_pile *lst);
+
+void	ft_putlst_pos(t_pile *lst);
 
 int		ft_is_sorted(t_pile *Pile);
 

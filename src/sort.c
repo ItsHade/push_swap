@@ -6,14 +6,11 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:04:22 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/24 12:49:31 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/25 21:13:55 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-//
-extern int g_count;
 
 int	ft_maxIndex(t_pile *pile_a)
 {
@@ -87,12 +84,10 @@ void	ft_sort3(t_pile **pile_a)
 	if ((*pile_a)->index == max)
 	{
 		do_ra(pile_a);
-		g_count++;
 	}
 	else if ((*pile_a)->next->index == max)
 	{
 		do_rra(pile_a);
-		g_count++;
 	}
 	if ((*pile_a)->index > (*pile_a)->next->index)
 		do_sa(pile_a);
@@ -161,11 +156,9 @@ void	ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int 
 				do_ra(pile_a);
 			else
 				do_rra(pile_a);
-			g_count++;
 		}
 		do_pb(pile_a, pile_b);
 		size--;
-		g_count++;
 		i++;
 	}
 	ft_putstr("TEST: ", 1);
@@ -177,7 +170,6 @@ void	ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int 
 	while (*pile_b != NULL)
 	{
 		do_pa(pile_a, pile_b);
-		g_count++;
 	}
 	ft_putstr("pile_a after: ", 1);
 	ft_putlst(*pile_a);
@@ -217,4 +209,157 @@ void	ft_radixsort(t_pile **pile_a, t_pile **pile_b, int size)
 		ft_countingSort(pile_a, pile_b, size, place, 10);
 		place *= 10;
 	}
+}
+
+
+void	ft_initiate_sorting(t_pile **pile_a, t_pile **pile_b, int size)
+{
+	int	pushed;
+	int	i;
+
+	pushed = 0;
+	i = 0;
+	while (size > 6 && i < size && pushed < size / 2)
+	{
+		if ((*pile_a)->index <= size / 2)
+		{
+			do_pb(pile_a, pile_b);
+			pushed++;
+		}
+		// maybe possible de stopper avant et ne pas rotate pour rien si il n'y a plus de index en dessous de size / 2
+		else
+			do_ra(pile_a);
+		i++;
+	}
+	while (size - pushed > 3)
+	{
+		do_pb(pile_a, pile_b);
+		pushed++;
+	}
+}
+
+void ft_get_pos(t_pile **pile)
+{
+	t_pile	*current;
+	int	i;
+
+	i = 0;
+	current = *pile;
+	while (current != NULL)
+	{
+		current->pos = i;
+		i++;
+		current = current->next;
+	}
+}
+
+int	ft_get_index_zero_pos(t_pile **pile_a)
+{
+	t_pile *current;
+
+	current = *pile_a;
+	while (current->index != 0)
+	{
+		current = current->next;
+	}
+	return (current->pos);
+}
+
+void	ft_put_index_zero_top(t_pile **pile_a, int size)
+{
+	int	zero_pos;
+
+	ft_get_pos(pile_a);
+	zero_pos = ft_get_index_zero_pos(pile_a);
+	//!= lowest index possible 0 or 1
+	while ((*pile_a)->index != 0)
+	{
+		if (zero_pos <= size / 2)
+			do_ra(pile_a);
+		else
+			do_rra(pile_a);
+	}
+}
+
+int	ft_get_max_pos(t_pile **pile)
+{
+	int		max_pos;
+	int		index;
+	t_pile	*current;
+
+	max_pos = 0;
+	index = (*pile)->index;
+	current = *pile;
+	while (current != NULL)
+	{
+		if (current->index > index)
+			max_pos = current->pos;
+		current = current->next;
+	}
+	return (max_pos);
+}
+
+int	ft_get_last_index(t_pile **pile_a)
+{
+	t_pile	*current;
+
+	current = *pile_a;
+	while (current != NULL && current->next != NULL)
+	{
+		current = current->next;
+	}
+	return (current->index);
+}
+
+int	ft_get_last_pos(t_pile **pile_a)
+{
+	t_pile	*current;
+	int		max_pos;
+
+	current = *pile_a;
+	max_pos = ft_get_max_pos(pile_a);
+	while (current != NULL && current->next != NULL)
+	{
+		current = current->next;
+	}
+	return (current->pos);
+}
+
+void	ft_place(t_pile **pile_a, t_pile **pile_b)
+{
+	int max_pos;
+
+	ft_get_pos(pile_a);
+	ft_get_pos(pile_b);
+	// ft_putstr("Pos A: ", 1);
+	// ft_putlst_pos(*pile_a);
+	// ft_putstr("Pos B: ", 1);
+	// ft_putlst_pos(*pile_b);
+	max_pos = ft_get_max_pos(pile_a);
+	if ((*pile_b)->index < (*pile_a)->index)
+	{
+		while (ft_get_last_index(pile_a) > (*pile_b)->index && ft_get_last_pos(pile_a) != max_pos)
+			do_rra(pile_a);
+		do_pa(pile_a, pile_b);
+	}
+	else
+	{
+		while ((*pile_a)->index < (*pile_b)->index && (*pile_a)->pos != max_pos)
+			do_ra(pile_a);
+		do_pa(pile_a, pile_b);
+	}
+
+}
+
+void	ft_sort(t_pile **pile_a, t_pile **pile_b, int size)
+{
+	ft_initiate_sorting(pile_a, pile_b, size);
+	ft_sort3(pile_a);
+	while (*pile_b != NULL)
+	{
+		ft_place(pile_a, pile_b);
+		ft_putstr("PLACED\n", 1);
+	}
+	ft_put_index_zero_top(pile_a, size);
+
 }

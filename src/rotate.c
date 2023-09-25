@@ -6,11 +6,13 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:35:54 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/16 20:36:15 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:46:20 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+extern int g_count;
 
 void	ft_lstrotate(t_pile **Pile)
 {
@@ -31,12 +33,14 @@ void	ft_lstrotate(t_pile **Pile)
 void	do_ra(t_pile **pile_a)
 {
 	ft_lstrotate(pile_a);
-	// ft_putstr("ra\n", 1);
+	g_count++;
+	ft_putstr("ra\n", 1);
 }
 
 void	do_rb(t_pile **pile_b)
 {
 	ft_lstrotate(pile_b);
+	g_count++;
 	ft_putstr("rb\n", 1);
 }
 
@@ -44,5 +48,6 @@ void	do_rr(t_pile **pile_a, t_pile **pile_b)
 {
 	ft_lstrotate(pile_a);
 	ft_lstrotate(pile_b);
+	g_count++;
 	ft_putstr("rr\n", 1);
 }
