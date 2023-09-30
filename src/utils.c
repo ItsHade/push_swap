@@ -64,3 +64,11 @@ long	ft_atol(char *s)
 	res = res * sign;
 	return (res);
 }
+
+int	ft_abs(int nb)
+{
+	if (nb >= 0)
+		return (nb);
+	else
+		return (-nb);
+}

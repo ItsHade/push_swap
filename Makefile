@@ -1,5 +1,5 @@
-SRCS = src/push_swap.c \
-		src/push_swap_utils.c \
+SRCS =	src/push_swap.c \
+		src/utils.c \
 		src/check_args.c \
 		src/list.c \
 		src/list2.c \
@@ -13,27 +13,47 @@ SRCS = src/push_swap.c \
 		src/put.c \
 		src/sort.c
 
+BONUS_SRCS =	src/list.c \
+				src/list2.c \
+				src/put.c \
+				src/rotate.c \
+				src/reverse_rotate.c \
+				src/push.c \
+				src/swap.c \
+				src/split.c \
+				src/ft_calloc.c \
+				src/checker.c \
+				src/utils.c \
+				src/check_args.c \
+				src/utils.c
+
+
 OBJS = $(SRCS:.c=.o)
+
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 NAME = push_swap
 
-CC = gcc
+CC = cc
 
 FLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-all:			$(NAME)
+all:		$(NAME)
 
-$(NAME):		$(OBJS)
-				$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+$(NAME):	$(OBJS)
+			$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+
+bonus:		$(BONUS_OBJS)
+			$(CC) $(FLAGS) $(BONUS_OBJS) -o $(BONUS_NAME)
 
 clean:
-				$(RM) $(OBJS)
+			$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean: 	clean
-				$(RM) $(NAME)
+			$(RM) $(NAME) $(BONUS_NAME)
 
 re:			fclean all
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re

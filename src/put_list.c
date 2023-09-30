@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:01:57 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/25 21:05:08 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:09:05 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	ft_putarray(int array[], int size)
 	while (i < size)
 	{
 		ft_putnbr(array[i]);
-		ft_putchar(' ', 1);
+		ft_putchar(' ');
 		i++;
 	}
-	ft_putchar('\n', 1);
+	ft_putchar('\n');
 }
 
 void	ft_putlst(t_pile *lst)
@@ -36,12 +36,12 @@ void	ft_putlst(t_pile *lst)
 	current = lst;
 	while (current != NULL)
 	{
-		ft_putchar('[', 1);
+		ft_putchar('[');
 		ft_putnbr(current->nb);
-		ft_putchar(']', 1);
+		ft_putchar(']');
 		current = current->next;
 	}
-	ft_putchar('\n', 1);
+	ft_putchar('\n');
 }
 
 void	ft_putlst2(t_pile *lst)
@@ -51,12 +51,42 @@ void	ft_putlst2(t_pile *lst)
 	current = lst;
 	while (current != NULL)
 	{
-		ft_putchar('[', 1);
+		ft_putchar('[');
 		ft_putnbr(current->index);
-		ft_putchar(']', 1);
+		ft_putchar(']');
 		current = current->next;
 	}
-	ft_putchar('\n', 1);
+	ft_putchar('\n');
+}
+
+void	ft_putlst3(t_pile *lst)
+{
+	t_pile	*current;
+
+	current = lst;
+	while (current != NULL)
+	{
+		ft_putchar('[');
+		ft_putnbr(current->cost_to_pos_a);
+		ft_putchar(']');
+		current = current->next;
+	}
+	ft_putchar('\n');
+}
+
+void	ft_putlst4(t_pile *lst)
+{
+	t_pile	*current;
+
+	current = lst;
+	while (current != NULL)
+	{
+		ft_putchar('[');
+		ft_putnbr(current->cost_to_top_b);
+		ft_putchar(']');
+		current = current->next;
+	}
+	ft_putchar('\n');
 }
 
 void	ft_putlst_pos(t_pile *lst)
@@ -66,44 +96,10 @@ void	ft_putlst_pos(t_pile *lst)
 	current = lst;
 	while (current != NULL)
 	{
-		ft_putchar('[', 1);
+		ft_putchar('[');
 		ft_putnbr(current->pos);
-		ft_putchar(']', 1);
+		ft_putchar(']');
 		current = current->next;
 	}
-	ft_putchar('\n', 1);
-}
-
-t_pile	*ft_lstcreate_b(void)
-{
-	t_pile	*testpile;
-	char	c;
-
-	c = 'A';
-	testpile = ft_lstnew(c);
-	c++;
-	while (testpile != NULL && c <= 'Z')
-	{
-		ft_lstadd_back(&testpile, ft_lstnew(c));
-		c++;
-	}
-	ft_putstr("Finished creating the linked list!\n", 1);
-	return (testpile);
-}
-
-t_pile	*ft_lstcreate_a(void)
-{
-	t_pile	*testpile;
-	char	c;
-
-	c = 'a';
-	testpile = ft_lstnew(c);
-	c++;
-	while (testpile != NULL && c <= 'z')
-	{
-		ft_lstadd_back(&testpile, ft_lstnew(c));
-		c++;
-	}
-	ft_putstr("Finished creating the linked list!\n", 1);
-	return (testpile);
+	ft_putchar('\n');
 }

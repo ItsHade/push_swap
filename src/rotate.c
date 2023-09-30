@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:35:54 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/25 20:46:20 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:07:57 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	do_ra(t_pile **pile_a)
 {
 	ft_lstrotate(pile_a);
 	g_count++;
-	ft_putstr("ra\n", 1);
+	ft_putstr("ra\n");
 }
 
 void	do_rb(t_pile **pile_b)
 {
 	ft_lstrotate(pile_b);
 	g_count++;
-	ft_putstr("rb\n", 1);
+	ft_putstr("rb\n");
 }
 
 void	do_rr(t_pile **pile_a, t_pile **pile_b)
@@ -49,5 +49,5 @@ void	do_rr(t_pile **pile_a, t_pile **pile_b)
 	ft_lstrotate(pile_a);
 	ft_lstrotate(pile_b);
 	g_count++;
-	ft_putstr("rr\n", 1);
+	ft_putstr("rr\n");
 }

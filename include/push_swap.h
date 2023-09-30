@@ -23,8 +23,18 @@ typedef struct s_pile
 	long			nb;
 	int				index;
 	int				pos;
+	int				cost_to_pos_a;
+	int				cost_to_top_b;
 	struct s_pile	*next;
 }	t_pile;
+
+int		ft_abs(int nb);
+
+int		ft_get_max_index(t_pile *pile_a);
+
+int		ft_get_min(t_pile **pile_a, long int last);
+
+void	ft_get_pos(t_pile **pile_a);
 
 void	ft_put_index_zero_top(t_pile **pile_a, int size);
 
@@ -35,8 +45,14 @@ void	ft_push_swap(t_pile **stack_a, t_pile **stack_b, int size);
 void	ft_sort(t_pile **stack_a, t_pile **stack_b, int size);
 
 void	ft_sort3(t_pile **pile_a);
-
+//
 void	ft_putlst2(t_pile *lst);
+
+void	ft_putlst3(t_pile *lst);
+
+void	ft_putlst4(t_pile *lst);
+
+int		ft_is_sorted2(t_pile *Pile);
 
 void	ft_putlst_pos(t_pile *lst);
 
@@ -62,9 +78,11 @@ void	ft_putnbr(int nb);
 
 int		ft_strint_cmp(char *s1, char *s2);
 
-void	ft_putchar(char c, int fd);
+void	ft_putchar(char c);
 
-void	ft_putstr(char *str, int fd);
+void	ft_putstr(char *str);
+
+void	ft_putstr_fd(char *str, int fd);
 
 int		ft_strlen(char *s);
 
@@ -110,12 +128,14 @@ void	do_rb(t_pile **pile_b);
 
 void	do_rr(t_pile **pile_a, t_pile **pile_b);
 
-void	ft_lst_reverse_rotate(t_pile **t_pile);
-
 void	do_rra(t_pile **pile_a);
 
 void	do_rrb(t_pile **pile_b);
 
-void	do_rr(t_pile **pile_a, t_pile **pile_b);
+void	do_rrr(t_pile **pile_a, t_pile **pile_b);
+
+void	ft_lst_reverse_rotate(t_pile **t_pile);
+
+
 
 #endif

@@ -6,25 +6,11 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:04:22 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/25 21:13:55 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:06:51 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-int	ft_maxIndex(t_pile *pile_a)
-{
-	int	max;
-
-	max = pile_a->index;
-	while (pile_a != NULL)
-	{
-		if (pile_a->index > max)
-			max = pile_a->index;
-		pile_a = pile_a->next;
-	}
-	return (max);
-}
 
 int	ft_get_min(t_pile **pile_a, long int last)
 {
@@ -52,35 +38,11 @@ int	ft_get_min(t_pile **pile_a, long int last)
 	return (min);
 }
 
-int	ft_getrotatelen(t_pile *pile_a, int index, int size)
-{
-	int	count;
-	t_pile	*current;
-
-	count = 0;
-	current = pile_a;
-	ft_putstr("------------\nsize: ", 1);
-	ft_putnbr(size);
-	ft_putchar('\n', 1);
-	while (current->index != index)
-	{
-		current = current->next;
-		count++;
-	}
-	ft_putstr("count: ", 1);
-	ft_putnbr(count);
-	ft_putchar('\n', 1);
-	if (count > (size / 2)) //maybe >=
-		return (-1);
-	return (1);
-}
-
-
 void	ft_sort3(t_pile **pile_a)
 {
 	int	max;
 
-	max = ft_maxIndex(*pile_a);
+	max = ft_get_max_index(*pile_a);
 	if ((*pile_a)->index == max)
 	{
 		do_ra(pile_a);
@@ -92,125 +54,6 @@ void	ft_sort3(t_pile **pile_a)
 	if ((*pile_a)->index > (*pile_a)->next->index)
 		do_sa(pile_a);
 }
-
-
-// too long -> divide in multiple functions
-void	ft_countingSort(t_pile **pile_a, t_pile **pile_b, int size, int place, int max)
-{
-	int	i;
-	int	a;
-	int	output[size + 1];
-	int	count[max];
-	t_pile	*current;
-
-	current = *pile_a;
-	i = 0;
-	while (i < max)
-	{
-		count[i] = 0;
-		i++;
-	}
-	while (current != NULL)
-	{
-		count[(current->index / place) % 10]++;
-		current = current->next;
-	}
-	i = 1;
-	while (i < 10)
-	{
-		count[i] += count[i - 1];
-		i++;
-	}
-	i = size - 1;
-	while (i >= 0)
-	{
-		current = *pile_a;
-		a = 0;
-		while (a < i)
-		{
-			current = current->next;
-			a++;
-		}
-		output[count[(current->index / place) % 10] - 1] = current->index;
-		count[(current->index / place) % 10]--;
-		i--;
-	}
-	i = 0;
-	ft_putstr("Avant boucle finale: \n", 1);
-	ft_putstr("output: ", 1);
-	ft_putarray(output, size);
-	ft_putstr("count: ", 1);
-	ft_putarray(count, max);
-	//si is sorted == 0 we stop and we have A = [6, 7, 8] et B = [5, 4, 3, 2, 1, 0]
-	while (size > 3 && ft_is_sorted(*pile_a) == -1)
-	{
-		a = ft_getrotatelen(*pile_a, output[i], size);
-		ft_putstr("a: ", 1);
-		ft_putnbr(a);
-		ft_putchar('\n', 1);
-		ft_putstr("Liste A index: ", 1);
-		ft_putlst2(*pile_a);
-		while ((*pile_a)->index != output[i])
-		{
-			if (a == 1)
-				do_ra(pile_a);
-			else
-				do_rra(pile_a);
-		}
-		do_pb(pile_a, pile_b);
-		size--;
-		i++;
-	}
-	ft_putstr("TEST: ", 1);
-	ft_putlst(*pile_a);
-	ft_sort3(pile_a);
-	ft_putlst(*pile_a);
-	// stop ^ quand size == 3 (3 elements dans A) swap si besoin et puis remettre tout B sur A
-	// *1
-	while (*pile_b != NULL)
-	{
-		do_pa(pile_a, pile_b);
-	}
-	ft_putstr("pile_a after: ", 1);
-	ft_putlst(*pile_a);
-}
-
-void	ft_addIndex(t_pile **pile_a, int size)
-{
-	long	min;
-	int	i;
-
-	min = -2147483649;
-	i = 0;
-	while (i < size)
-	{
-		min = ft_get_min(pile_a, min);
-		i++;
-	}
-}
-
-// get min and max check which is gonna take less instructions to get to
-
-
-void	ft_radixsort(t_pile **pile_a, t_pile **pile_b, int size)
-{
-	int	place;
-	int	max;
-
-	place = 1;
-	max = ft_maxIndex(*pile_a);
-	while (max / place > 0)
-	{
-		ft_putstr("Liste A: ", 1);
-		ft_putlst(*pile_a);
-		ft_putstr("Liste B: ", 1);
-		ft_putlst(*pile_b);
-		// *1 enlever la boucle qui remet tout dans A et refaire une fonction qu'on appelle une fois sur deux qui tri a partir de B (a l'envers)
-		ft_countingSort(pile_a, pile_b, size, place, 10);
-		place *= 10;
-	}
-}
-
 
 void	ft_initiate_sorting(t_pile **pile_a, t_pile **pile_b, int size)
 {
@@ -238,10 +81,10 @@ void	ft_initiate_sorting(t_pile **pile_a, t_pile **pile_b, int size)
 	}
 }
 
-void ft_get_pos(t_pile **pile)
+void	ft_get_pos(t_pile **pile)
 {
 	t_pile	*current;
-	int	i;
+	int		i;
 
 	i = 0;
 	current = *pile;
@@ -255,7 +98,7 @@ void ft_get_pos(t_pile **pile)
 
 int	ft_get_index_zero_pos(t_pile **pile_a)
 {
-	t_pile *current;
+	t_pile	*current;
 
 	current = *pile_a;
 	while (current->index != 0)
@@ -271,7 +114,6 @@ void	ft_put_index_zero_top(t_pile **pile_a, int size)
 
 	ft_get_pos(pile_a);
 	zero_pos = ft_get_index_zero_pos(pile_a);
-	//!= lowest index possible 0 or 1
 	while ((*pile_a)->index != 0)
 	{
 		if (zero_pos <= size / 2)
@@ -281,7 +123,7 @@ void	ft_put_index_zero_top(t_pile **pile_a, int size)
 	}
 }
 
-int	ft_get_max_pos(t_pile **pile)
+int	ft_get_max_index_pos(t_pile **pile)
 {
 	int		max_pos;
 	int		index;
@@ -314,10 +156,8 @@ int	ft_get_last_index(t_pile **pile_a)
 int	ft_get_last_pos(t_pile **pile_a)
 {
 	t_pile	*current;
-	int		max_pos;
 
 	current = *pile_a;
-	max_pos = ft_get_max_pos(pile_a);
 	while (current != NULL && current->next != NULL)
 	{
 		current = current->next;
@@ -325,30 +165,211 @@ int	ft_get_last_pos(t_pile **pile_a)
 	return (current->pos);
 }
 
-void	ft_place(t_pile **pile_a, t_pile **pile_b)
+int	ft_get_max_index(t_pile *pile_a)
 {
-	int max_pos;
+	t_pile	*current;
+	int		max_index;
+
+	current = pile_a;
+	max_index = pile_a->index;
+	while (current != NULL)
+	{
+		if (current->index > max_index)
+			max_index = current->index;
+		current = current->next;
+	}
+	return (max_index);
+}
+
+int	ft_get_min_index(t_pile *pile_a)
+{
+	t_pile	*current;
+	int		min_index;
+
+	current = pile_a;
+	min_index = pile_a->index;
+	while (current != NULL)
+	{
+		if (current->index < min_index)
+			min_index = current->index;
+		current = current->next;
+	}
+	return (min_index);
+}
+
+int	ft_first_is_lowest(t_pile **pile)
+{
+	if ((*pile)->index == ft_get_min_index(*pile))
+		return (0);
+	return (-1);
+}
+
+int	ft_get_cost_a(t_pile **pile_a, t_pile *element_b)
+{
+	t_pile	*current;
+	int		size;
+	int		cost;
+	int		min;
+	int		max;
+
+	current = *pile_a;
+	size = ft_lstsize(current);
+	cost = 0;
+	max = ft_get_max_index(*pile_a);
+	min = ft_get_min_index(*pile_a);
+	while (current != NULL && current->next != NULL)
+	{
+		if (current->index == min && element_b->index < current->index)
+			break ;
+		cost++;
+		if (current->index == max && element_b->index > current->index)
+			break ;
+		if (element_b->index > current->index && element_b->index < current->next->index)
+			break ;
+		current = current->next;
+	}
+	if (element_b->index > current->index && current->next == NULL)
+		cost++;
+	if (cost >= size)
+		return (0);
+	if (cost > size / 2)
+		return (((size - cost)) * -1);
+	return (cost);
+}
+
+int	ft_get_cost_b(t_pile *element_b, int size)
+{
+	if (element_b->pos > size / 2)
+		return ((size - element_b->pos) * -1);
+	else
+		return (element_b->pos);
+}
+
+void	ft_get_cost(t_pile **pile_a, t_pile **pile_b)
+{
+	int		min_cost;
+	int		size_b;
+	t_pile	*current;
 
 	ft_get_pos(pile_a);
 	ft_get_pos(pile_b);
-	// ft_putstr("Pos A: ", 1);
-	// ft_putlst_pos(*pile_a);
-	// ft_putstr("Pos B: ", 1);
-	// ft_putlst_pos(*pile_b);
-	max_pos = ft_get_max_pos(pile_a);
-	if ((*pile_b)->index < (*pile_a)->index)
+	size_b = ft_lstsize(*pile_b);
+	current = *pile_b;
+	while (current != NULL)
 	{
-		while (ft_get_last_index(pile_a) > (*pile_b)->index && ft_get_last_pos(pile_a) != max_pos)
-			do_rra(pile_a);
-		do_pa(pile_a, pile_b);
+		current->cost_to_pos_a = ft_get_cost_a(pile_a, current);
+		current->cost_to_top_b = ft_get_cost_b(current, size_b);
+		current = current->next;
+	}
+}
+
+int	ft_calculate_move_cost(int pos_a, int pos_b)
+{
+	if (pos_a >= 0 && pos_b >= 0)
+	{
+		if (pos_a >= pos_b)
+			return (pos_a);
+		return (pos_b);
+	}
+	else if (pos_a < 0 && pos_b < 0)
+	{
+		if (ft_abs(pos_a) > ft_abs(pos_b))
+			return (ft_abs(pos_a));
 	}
 	else
 	{
-		while ((*pile_a)->index < (*pile_b)->index && (*pile_a)->pos != max_pos)
-			do_ra(pile_a);
-		do_pa(pile_a, pile_b);
+		return (ft_abs(pos_a) + ft_abs(pos_b));
 	}
+}
 
+int	ft_get_index_of_best(t_pile **pile_a, t_pile **pile_b)
+{
+	t_pile	*current;
+	int		best_move;
+	int		best_index;
+	int		check;
+
+	best_index = (*pile_b)->index;
+	best_move = INT_MAX;
+	current = *pile_b;
+	while (current != NULL)
+	{
+		check = ft_calculate_move_cost(current->cost_to_pos_a, current->cost_to_top_b);
+		if (check < best_move)
+		{
+			best_index = current->index;
+			best_move = check;
+		}
+		current = current->next;
+	}
+	return (best_index);
+}
+
+int	ft_get_cost_a_of_index(t_pile **pile_b, int best_index)
+{
+	t_pile	*current;
+
+	current = *pile_b;
+	while (current->index != best_index)
+	{
+		current = current->next;
+	}
+	return (current->cost_to_pos_a);
+}
+
+int	ft_get_cost_b_of_index(t_pile **pile_b, int best_index)
+{
+	t_pile	*current;
+
+	current = *pile_b;
+	while (current->index != best_index)
+	{
+		current = current->next;
+	}
+	return (current->cost_to_top_b);
+}
+
+void	ft_do_best(t_pile **pile_a, t_pile **pile_b)
+{
+	int	best_index;
+	int	to_top_b;
+	int	to_pos_a;
+
+	best_index = ft_get_index_of_best(pile_a, pile_b);
+	to_top_b = ft_get_cost_b_of_index(pile_b, best_index);
+	to_pos_a = ft_get_cost_a_of_index(pile_b, best_index);
+	while (to_top_b > 0 && to_pos_a > 0)
+	{
+		do_rr(pile_a, pile_b);
+		to_top_b--;
+		to_pos_a--;
+	}
+	while (to_top_b < 0 && to_pos_a < 0)
+	{
+		do_rrr(pile_a, pile_b);
+		to_top_b++;
+		to_pos_a++;
+	}
+	while (to_top_b < 0)
+	{
+		do_rrb(pile_b);
+		to_top_b++;
+	}
+	while (to_top_b > 0)
+	{
+		do_rb(pile_b);
+		to_top_b--;
+	}
+	while (to_pos_a < 0)
+	{	do_rra(pile_a);
+		to_pos_a++;
+	}
+	while (to_pos_a > 0)
+	{
+		do_ra(pile_a);
+		to_pos_a--;
+	}
+	do_pa(pile_a, pile_b);
 }
 
 void	ft_sort(t_pile **pile_a, t_pile **pile_b, int size)
@@ -357,9 +378,8 @@ void	ft_sort(t_pile **pile_a, t_pile **pile_b, int size)
 	ft_sort3(pile_a);
 	while (*pile_b != NULL)
 	{
-		ft_place(pile_a, pile_b);
-		ft_putstr("PLACED\n", 1);
+		ft_get_cost(pile_a, pile_b);
+		ft_do_best(pile_a, pile_b);
 	}
 	ft_put_index_zero_top(pile_a, size);
-
 }
