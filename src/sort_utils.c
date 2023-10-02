@@ -71,8 +71,5 @@ int	ft_calculate_move_cost(int pos_a, int pos_b)
 		if (ft_abs(pos_a) > ft_abs(pos_b))
 			return (ft_abs(pos_a));
 	}
-	else
-	{
-		return (ft_abs(pos_a) + ft_abs(pos_b));
-	}
+	return (ft_abs(pos_a) + ft_abs(pos_b));
 }

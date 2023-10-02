@@ -54,7 +54,7 @@ int	ft_get_min(t_pile **pile_a, long int last)
 	return (min);
 }
 
-void	ft_addIndex(t_pile **pile_a, int size)
+void	ft_add_index(t_pile **pile_a, int size)
 {
 	long	min;
 	int		i;
@@ -94,17 +94,18 @@ int	main(int argc, char **argv)
 		return (ft_lstclear(&pile_a), 0);
 	}
 	size = ft_lstsize(pile_a);
-	ft_addIndex(&pile_a, size);
-	//enlever already sorted
+	ft_add_index(&pile_a, size);
 	if (ft_is_sorted(pile_a) == 0)
-		return (ft_putstr("Already sorted!\n"), ft_lstclear(&pile_a), 0);
+		return (ft_lstclear(&pile_a), 0);
 	ft_push_swap(&pile_a, &pile_b, size);
 	if (ft_is_sorted(pile_a) == 0)
 	{
 		ft_putstr("\033[1;32mStack has been sorted!\033[1;0m\n");
 	}
 	ft_putnbr(g_count);
-	ft_putstr(" instructions!\n");
+	ft_putstr(" instructions for ");
+	ft_putnbr(size);
+	ft_putstr(" numbers!\n");
 	ft_lstclear(&pile_a);
 	ft_lstclear(&pile_b);
 	return (0);

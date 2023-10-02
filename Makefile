@@ -2,8 +2,6 @@ SRCS =	src/push_swap.c \
 		src/utils.c \
 		src/check_args.c \
 		src/list.c \
-		src/list2.c \
-		src/put_list.c \
 		src/swap.c \
 		src/push.c \
 		src/rotate.c \
@@ -17,7 +15,6 @@ SRCS =	src/push_swap.c \
 		src/do_move.c
 
 BONUS_SRCS =	src/list.c \
-				src/list2.c \
 				src/put.c \
 				src/rotate.c \
 				src/reverse_rotate.c \

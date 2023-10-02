@@ -12,7 +12,7 @@
 
 #include "../include/push_swap.h"
 
-extern int g_count;
+extern int	g_count;
 
 void	ft_lst_reverse_rotate(t_pile **Pile)
 {
