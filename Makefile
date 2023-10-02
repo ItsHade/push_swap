@@ -11,7 +11,10 @@ SRCS =	src/push_swap.c \
 		src/split.c \
 		src/ft_calloc.c \
 		src/put.c \
-		src/sort.c
+		src/sort.c \
+		src/sort_utils.c \
+		src/get_cost.c \
+		src/do_move.c
 
 BONUS_SRCS =	src/list.c \
 				src/list2.c \

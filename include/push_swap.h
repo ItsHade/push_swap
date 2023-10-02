@@ -28,13 +28,113 @@ typedef struct s_pile
 	struct s_pile	*next;
 }	t_pile;
 
+/* SORT */
+
+void	ft_sort(t_pile **pile_a, t_pile **pile_b, int size);
+
+void	ft_put_index_zero_top(t_pile **pile_a, int size);
+
+int		ft_get_index_zero_pos(t_pile **pile_a);
+
+void	ft_sort3(t_pile **pile_a);
+
+void	ft_initiate_sorting(t_pile **pile_a, t_pile **pile_b, int size);
+
+/* DO MOVE */
+
+void	ft_do_best(t_pile **pile_a, t_pile **pile_b);
+
+int		ft_get_cost_b_of_index(t_pile **pile_b, int best_index);
+
+int		ft_get_cost_a_of_index(t_pile **pile_b, int best_index);
+
+int		ft_get_index_of_best(t_pile **pile_a, t_pile **pile_b);
+
+/* GET COST*/
+
+void	ft_get_cost(t_pile **pile_a, t_pile **pile_b);
+
+int		ft_get_cost_b(t_pile *element_b, int size);
+
+int		ft_get_cost_a(t_pile **pile_a, t_pile *elem_b, int min, int max);
+
+int		ft_get_min_index(t_pile *pile_a);
+
+int		ft_get_max_index(t_pile *pile_a);
+
+/* SORT UTILS */
+
+void	ft_get_pos(t_pile **pile);
+
+int		ft_get_last_index(t_pile **pile_a);
+
+int		ft_get_last_pos(t_pile **pile_a);
+
+int		ft_first_is_lowest(t_pile **pile);
+
+int		ft_calculate_move_cost(int pos_a, int pos_b);
+
+/* UTILS */
+
+int		ft_strlen(char *s);
+
+void	ft_freesplit(char **strs);
+
+long	ft_atol(char *s);
+
 int		ft_abs(int nb);
+
+/* MOVES */
+
+void	do_sa(t_pile **pile_a);
+
+void	do_sb(t_pile **pile_b);
+
+void	do_ss(t_pile **pile_a, t_pile **pile_b);
+
+void	do_pa(t_pile **pile_a, t_pile **pile_b);
+
+void	do_pb(t_pile **pile_a, t_pile **pile_b);
+
+void	do_ra(t_pile **pile_a);
+
+void	do_rb(t_pile **pile_b);
+
+void	do_rr(t_pile **pile_a, t_pile **pile_b);
+
+void	do_rra(t_pile **pile_a);
+
+void	do_rrb(t_pile **pile_b);
+
+void	do_rrr(t_pile **pile_a, t_pile **pile_b);
+
+/* SPLIT */
+
+int		ft_wordcount(char *s, char c);
+
+int		ft_getwordlen(char *s, char c, int i);
+
+void	ft_freemalloc(char **strs, int a);
+
+char	**ft_split(char const *s, char c);
+
+/* PUT */
+
+void	ft_putchar(char c);
+
+void	ft_putstr(char *str);
+
+void	ft_putstr_fd(char *str, int fd);
+
+void	ft_putnbr(int nb);
+
+/* */
 
 int		ft_get_max_index(t_pile *pile_a);
 
 int		ft_get_min(t_pile **pile_a, long int last);
 
-void	ft_get_pos(t_pile **pile_a);
+void	ft_get_pos(t_pile **pile);
 
 void	ft_put_index_zero_top(t_pile **pile_a, int size);
 

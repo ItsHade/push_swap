@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 21:01:57 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/27 14:09:05 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:12:38 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 
 //below are not usefull functions in the final build
 
-// not needed int final build
-void	ft_putarray(int array[], int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		ft_putnbr(array[i]);
-		ft_putchar(' ');
-		i++;
-	}
-	ft_putchar('\n');
-}
 
 void	ft_putlst(t_pile *lst)
 {

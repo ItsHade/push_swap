@@ -27,32 +27,37 @@ int	ft_is_sorted(t_pile *Pile)
 	}
 	return (0);
 }
-//2
-int	ft_is_sorted2(t_pile *Pile)
-{
-	int notordered;
 
-	notordered = 0;
-	if (Pile == NULL || Pile->next == NULL)
+int	ft_get_min(t_pile **pile_a, long int last)
+{
+	t_pile		*current;
+	t_pile		*min_element;
+	long		min;
+	static int	i = 0;
+
+	if (*pile_a == NULL)
 		return (0);
-	ft_get_pos(&Pile);
-	while (Pile->next != NULL)
+	current = *pile_a;
+	min = 2147483648;
+	min_element = *pile_a;
+	while (current != NULL)
 	{
-		if (Pile->index > Pile->next->index)
+		if (current->nb < min && current->nb > last)
 		{
-			notordered++;
+			min_element = current;
+			min = current->nb;
 		}
-		if (notordered > 1)
-			return (-1);
-		Pile = Pile->next;
+		current = current->next;
 	}
-	return (0);
+	min_element->index = i;
+	i++;
+	return (min);
 }
 
 void	ft_addIndex(t_pile **pile_a, int size)
 {
 	long	min;
-	int	i;
+	int		i;
 
 	min = -2147483649;
 	i = 0;
@@ -77,7 +82,7 @@ int	main(int argc, char **argv)
 {
 	t_pile	*pile_a;
 	t_pile	*pile_b;
-	int size;
+	int		size;
 
 	pile_a = NULL;
 	pile_b = NULL;
