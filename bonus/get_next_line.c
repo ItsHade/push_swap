@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:06:03 by maburnet          #+#    #+#             */
-/*   Updated: 2023/10/03 17:10:27 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/10/03 23:09:11 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strjoin(char *tmp, char *buf)
 	if (!tmp)
 	{
 		tmp = (char *)malloc(1 * sizeof(char));
+		if (!tmp)
+			return (NULL);
 		tmp[0] = '\0';
 	}
 	if (!tmp || !buf)
@@ -70,6 +72,8 @@ char	*get_next_line(int fd, int *nb_bytes)
 			return (free(buf), tmp);
 		buf[*nb_bytes] = '\0';
 		tmp = ft_strjoin(tmp, buf);
+		if (tmp == NULL)
+			return (NULL);
 		if (buf[0] == '\n')
 			break ;
 	}

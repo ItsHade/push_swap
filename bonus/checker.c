@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:00:06 by maburnet          #+#    #+#             */
-/*   Updated: 2023/10/03 17:09:37 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/10/03 23:09:59 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	ft_get_instructions(t_pile **pile_a, t_pile **pile_b)
 	while (nbbytes > 0)
 	{
 		buffer = get_next_line(0, &nbbytes);
+		if (buffer == NULL)
+			return (-1);
 		if (nbbytes > 0)
 		{
 			error = ft_do_instruction(pile_a, pile_b, buffer);

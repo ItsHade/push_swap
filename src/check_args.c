@@ -45,6 +45,8 @@ int	ft_check_splitted(char **strs, t_pile **pile_a)
 		if (nb < INT_MIN || nb > INT_MAX)
 			return (-1);
 		new = ft_lstnew(nb);
+		if (new == NULL)
+			return (-1);
 		ft_lstadd_back(pile_a, new);
 		a++;
 	}
@@ -80,6 +82,8 @@ int	ft_valid_args(char **argv, t_pile **pile_a)
 	while (argv[i])
 	{
 		strs = ft_split(argv[i], ' ');
+		if (strs == NULL)
+			return (-1);
 		if (ft_check_splitted(strs, pile_a) == -1)
 			return (ft_freesplit(strs), -1);
 		ft_freesplit(strs);

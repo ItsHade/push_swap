@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:47:18 by maburnet          #+#    #+#             */
-/*   Updated: 2023/10/03 17:14:04 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/10/03 22:45:44 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ char	**ft_split(char const *s, char c)
 			strs[a][b++] = s[i++];
 	}
 	strs[a] = ft_calloc(sizeof(char), 1);
+	if (!strs[a])
+		return (ft_freemalloc(strs, a), NULL);
 	return (strs);
 }
