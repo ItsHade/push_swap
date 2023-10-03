@@ -28,7 +28,7 @@ typedef struct s_pile
 	struct s_pile	*next;
 }	t_pile;
 
-/* MAIN */
+/* PUSH SWAP */
 
 int		ft_is_sorted(t_pile *Pile);
 

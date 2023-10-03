@@ -6,7 +6,7 @@
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:35:35 by maburnet          #+#    #+#             */
-/*   Updated: 2023/10/03 17:11:18 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:58:32 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,9 @@ void	ft_lstpush(t_pile **pile_1, t_pile **pile_2)
 void	do_pa(t_pile **pile_a, t_pile **pile_b)
 {
 	ft_lstpush(pile_a, pile_b);
-	ft_putstr("pa\n");
 }
 
 void	do_pb(t_pile **pile_a, t_pile **pile_b)
 {
 	ft_lstpush(pile_b, pile_a);
-	ft_putstr("pb\n");
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:47:18 by maburnet          #+#    #+#             */
-/*   Updated: 2023/09/16 20:47:32 by maburnet         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:14:04 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ char	**ft_split(char const *s, char c)
 			i++;
 		strs[a] = ft_calloc(sizeof(char), (ft_getwordlen((char *)s, c, i) + 1));
 		if (!strs[a])
-		{	
-			ft_freemalloc(strs, a);
-			return (NULL);
-		}
+			return (ft_freemalloc(strs, a), NULL);
 		while (s[i] && s[i] != c)
 			strs[a][b++] = s[i++];
 	}

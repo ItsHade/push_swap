@@ -1,4 +1,5 @@
-SRCS =	src/push_swap.c \
+SRCS =	src/main.c \
+		src/push_swap.c \
 		src/utils.c \
 		src/check_args.c \
 		src/list.c \
@@ -16,16 +17,16 @@ SRCS =	src/push_swap.c \
 
 BONUS_SRCS =	src/list.c \
 				src/put.c \
-				src/rotate.c \
-				src/reverse_rotate.c \
-				src/push.c \
-				src/swap.c \
+				bonus/rotate.c \
+				bonus/reverse_rotate.c \
+				bonus/push.c \
+				bonus/swap.c \
 				src/split.c \
 				src/ft_calloc.c \
-				src/checker.c \
-				src/utils.c \
+				bonus/checker.c \
 				src/check_args.c \
-				src/utils.c
+				src/utils.c \
+				bonus/get_next_line.c
 
 
 OBJS = $(SRCS:.c=.o)
@@ -33,6 +34,8 @@ OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 NAME = push_swap
+
+BONUS_NAME = checker
 
 CC = cc
 

@@ -12,9 +12,6 @@
 
 #include "../include/push_swap.h"
 
-//
-int	g_count = 0;
-
 int	ft_is_sorted(t_pile *Pile)
 {
 	if (Pile == NULL || Pile->next == NULL)
@@ -76,37 +73,4 @@ void	ft_push_swap(t_pile **pile_a, t_pile **pile_b, int size)
 		ft_sort3(pile_a);
 	else
 		ft_sort(pile_a, pile_b, size);
-}
-
-int	main(int argc, char **argv)
-{
-	t_pile	*pile_a;
-	t_pile	*pile_b;
-	int		size;
-
-	pile_a = NULL;
-	pile_b = NULL;
-	if (argc < 2)
-		return (0);
-	if (ft_valid_args(argv, &pile_a) == -1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (ft_lstclear(&pile_a), 0);
-	}
-	size = ft_lstsize(pile_a);
-	ft_add_index(&pile_a, size);
-	if (ft_is_sorted(pile_a) == 0)
-		return (ft_lstclear(&pile_a), 0);
-	ft_push_swap(&pile_a, &pile_b, size);
-	if (ft_is_sorted(pile_a) == 0)
-	{
-		ft_putstr("\033[1;32mStack has been sorted!\033[1;0m\n");
-	}
-	ft_putnbr(g_count);
-	ft_putstr(" instructions for ");
-	ft_putnbr(size);
-	ft_putstr(" numbers!\n");
-	ft_lstclear(&pile_a);
-	ft_lstclear(&pile_b);
-	return (0);
 }

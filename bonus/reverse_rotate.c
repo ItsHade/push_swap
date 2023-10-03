@@ -1,48 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maburnet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 20:35:54 by maburnet          #+#    #+#             */
-/*   Updated: 2023/10/03 17:11:55 by maburnet         ###   ########.fr       */
+/*   Created: 2023/09/16 20:36:32 by maburnet          #+#    #+#             */
+/*   Updated: 2023/10/03 15:58:22 by maburnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ft_lstrotate(t_pile **Pile)
+void	ft_lst_reverse_rotate(t_pile **Pile)
 {
 	t_pile	*last;
 	t_pile	*current;
-	t_pile	*next;
 
 	if (*Pile == NULL || (*Pile)->next == NULL)
 		return ;
-	last = ft_lstlast(*Pile);
-	next = (*Pile)->next;
 	current = *Pile;
+	last = ft_lstlast(*Pile);
+	while (current->next->next != NULL)
+		current = current->next;
 	current->next = NULL;
-	last->next = current;
-	*Pile = next;
+	last->next = *Pile;
+	*Pile = last;
 }
 
-void	do_ra(t_pile **pile_a)
+void	do_rra(t_pile **pile_a)
 {
-	ft_lstrotate(pile_a);
-	ft_putstr("ra\n");
+	ft_lst_reverse_rotate(pile_a);
 }
 
-void	do_rb(t_pile **pile_b)
+void	do_rrb(t_pile **pile_b)
 {
-	ft_lstrotate(pile_b);
-	ft_putstr("rb\n");
+	ft_lst_reverse_rotate(pile_b);
 }
 
-void	do_rr(t_pile **pile_a, t_pile **pile_b)
+void	do_rrr(t_pile **pile_a, t_pile **pile_b)
 {
-	ft_lstrotate(pile_a);
-	ft_lstrotate(pile_b);
-	ft_putstr("rr\n");
+	ft_lst_reverse_rotate(pile_a);
+	ft_lst_reverse_rotate(pile_b);
 }
